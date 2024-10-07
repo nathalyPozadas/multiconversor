@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiconversor</title>
+    <link rel="icon" href="resources/icon_multiconversor.svg">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/x2js/1.2.0/x2js.js"></script>
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            height: 100vh;
+            margin: 0;
+            background-color: #f8f9fb;
+            overflow-y: auto;
+        }
+
+        .header {
+            background-color: black;
+            color: white;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .header-nav {
+            display: flex;
+            gap: 15px;
+        }
+
+        .header-nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            padding: 8px 12px;
+            border-radius: 4px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .header-nav a:hover {
+            background-color: #333;
+            color: #00d2d3;
+        }
+
+        .header img {
+            height: 40px;
+        }
+
+        .header h1 {
+            margin: 0;
+            margin-left: 10%;
+            font-weight: 600;
+            font-size: 24px;
+        }
+
+        .header-icon {
+            width: 40px;
+            height: 24px;
+            margin-right: 10px;
+        }
+
+        .container1 {
+            max-width: 1200px;
+            margin: 20px auto;
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .left-column,
+        .right-column {
+            width: 50%;
+            padding: 10px;
+            float: left;
+        }
+
+        .form-container,
+        .result-container {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .monaco-container {
+            height: 600px;
+            width: 100%;
+            background-color: #ffffff;
+            border-radius: 4px;
+        }
+
+
+
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+
+        .title-row {
+            margin-bottom: 20px;
+            margin-left: 10px;
+        }
+
+        .title-row h2 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+
+        .functionButton {
+            background-color: transparent;
+            border: 1px solid black;
+            color: black;
+            padding: 5px 10px;
+            font-size: 14px;
+            border-radius: 3px;
+            /* Curva muy ligera en las esquinas */
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            /* Efecto suave para hover */
+        }
+
+        .functionButton:hover {
+            background-color: #008a8b;
+            color: white;
+            /* Cambia el color del texto al hacer hover para mejor contraste */
+        }
+    </style>
+</head>
+
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <header class="header">
+
+        <h1><img src="resources/icon_multiconversor.svg" alt="Icono" class="header-icon">
+            Multiconversor</h1>
+        <nav class="header-nav">
+            <a href="json_v2.html" data-format="json">JSON</a>
+            <a href="xml_v2.html" data-format="xml">XML</a>
+            <a href="compare_v2.html" >Text Compare</a>
+            <a href="base64.html" >Base 64</a>
+            <a href="#" data-format="pdf">PDF</a>
+        </nav>
+    </header>
+
+    <div class="container1 ">
+        <div class="row title-row">
+            <h2>XML Formatter</h2>
+        </div>
+
+        <div class="row">
+            <div class="container">
+                <div class="left-column">
+
+                    <div class="form-container">
+                        <div style="padding-bottom: 20px;">
+                            <button class="functionButton" id="beautyButton">Beautify</button>
+                            <button class="functionButton" id="minifyButton">Minify</button>
+                            <button class="functionButton" id="copyButton">Copiar</button>
+                            <button class="functionButton" id="clearButton">Limpiar</button>
+                        </div>
+                        <div
+                            style="background-color: rgb(61, 61, 61); color: white; padding: 0px; display: flex; justify-content: flex-end; gap: 10px;">
+                            <button id="copyCodeButtonEntrada" class="flex gap-1 items-center py-1"
+                                style="background-color: transparent; border: none; color: white; display: flex; align-items: center; cursor: pointer;">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg" class="icon-sm">
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M7 5C7 3.34315 8.34315 2 10 2H19C20.6569 2 22 3.34315 22 5V14C22 15.6569 20.6569 17 19 17H17V19C17 20.6569 15.6569 22 14 22H5C3.34315 22 2 20.6569 2 19V10C2 8.34315 3.34315 7 5 7H7V5ZM9 7H14C15.6569 7 17 8.34315 17 10V15H19C19.5523 15 20 14.5523 20 14V5C20 4.44772 19.5523 4 19 4H10C9.44772 4 9 4.44772 9 5V7ZM5 9C4.44772 9 4 9.44772 4 10V19C4 19.5523 4.44772 20 5 20H14C14.5523 20 15 19.5523 15 19V10C15 9.44772 14.5523 9 14 9H5Z"
+                                        fill="currentColor"></path>
+                                </svg>
+                            </button>
+                            <!-- Botón con otro ícono
+                        <button id="minify_input" class="flex gap-1 items-center py-1" style="background-color: transparent; border: none; color: white; display: flex; align-items: center; cursor: pointer;">
+                            <svg width="24" height="24" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" fill="none">
+                                <path fill="#ffffff" fill-rule="evenodd" d="M18 5a1 1 0 100-2H2a1 1 0 000 2h16zm0 4a1 1 0 100-2H2a1 1 0 100 2h16zm1 3a1 1 0 01-1 1H2a1 1 0 110-2h16a1 1 0 011 1zm-1 5a1 1 0 100-2H2a1 1 0 100 2h16z"></path>
+                            </svg>
+                        </button>
+                        <button id="beauty_input" class="flex gap-1 items-center py-1" style="background-color: transparent; border: none; color: white; display: flex; align-items: center; cursor: pointer;">
+                            <svg width="24" height="24" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" fill="none">
+                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                <g id="SVGRepo_iconCarrier">
+                                    <path fill="#ffffff" fill-rule="evenodd" d="M18 5a1 1 0 100-2H2a1 1 0 000 2h16zm0 4a1 1 0 100-2h-8a1 1 0 100 2h8zm1 3a1 1 0 01-1 1H2a1 1 0 110-2h16a1 1 0 011 1zm-1 5a1 1 0 100-2h-8a1 1 0 100 2h8z"></path>
+                                </g>
+                            </svg>
+                        </button>
+                        -->
+                        </div>
+
+                        <div id="input-editor" class="monaco-container"></div>
+                    </div>
+                </div>
+
+                <div class="right-column">
+                    <div class="result-container">
+                        
+                        
+                        
+                        <button id="btn_convertir" class="functionButton">Convertir a JSON</button>
+                    </div>
+                        <div
+                            style="background-color: rgb(61, 61, 61); color: white; padding: 0px; display: flex; justify-content: flex-end; gap: 10px;">
+                            <!-- Botón con ícono de copiar -->
+                            <button id="copyCodeButtonResult" class="flex gap-1 items-center py-1"
+                                style="background-color: transparent; border: none; color: white; display: flex; align-items: center; cursor: pointer;">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg" class="icon-sm">
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M7 5C7 3.34315 8.34315 2 10 2H19C20.6569 2 22 3.34315 22 5V14C22 15.6569 20.6569 17 19 17H17V19C17 20.6569 15.6569 22 14 22H5C3.34315 22 2 20.6569 2 19V10C2 8.34315 3.34315 7 5 7H7V5ZM9 7H14C15.6569 7 17 8.34315 17 10V15H19C19.5523 15 20 14.5523 20 14V5C20 4.44772 19.5523 4 19 4H10C9.44772 4 9 4.44772 9 5V7ZM5 9C4.44772 9 4 9.44772 4 10V19C4 19.5523 4.44772 20 5 20H14C14.5523 20 15 19.5523 15 19V10C15 9.44772 14.5523 9 14 9H5Z"
+                                        fill="currentColor"></path>
+                                </svg>
+                            </button>
+
+                            <!-- Botón con otro ícono 
+                        <button id="minify_result" class="flex gap-1 items-center py-1" style="background-color: transparent; border: none; color: white; display: flex; align-items: center; cursor: pointer;">
+                            <svg width="24" height="24" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" fill="none">
+                                <path fill="#ffffff" fill-rule="evenodd" d="M18 5a1 1 0 100-2H2a1 1 0 000 2h16zm0 4a1 1 0 100-2H2a1 1 0 100 2h16zm1 3a1 1 0 01-1 1H2a1 1 0 110-2h16a1 1 0 011 1zm-1 5a1 1 0 100-2H2a1 1 0 100 2h16z"></path>
+                            </svg>
+                        </button>
+                        <button id="beauty_result" class="flex gap-1 items-center py-1" style="background-color: transparent; border: none; color: white; display: flex; align-items: center; cursor: pointer;">
+                            <svg width="24" height="24" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" fill="none">
+                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                <g id="SVGRepo_iconCarrier">
+                                    <path fill="#ffffff" fill-rule="evenodd" d="M18 5a1 1 0 100-2H2a1 1 0 000 2h16zm0 4a1 1 0 100-2h-8a1 1 0 100 2h8zm1 3a1 1 0 01-1 1H2a1 1 0 110-2h16a1 1 0 011 1zm-1 5a1 1 0 100-2h-8a1 1 0 100 2h8z"></path>
+                                </g>
+                            </svg>
+                        </button>
+                        -->
+                        </div>
+                        <div id="monaco-editor" class="monaco-container"></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.21.2/min/vs/loader.js"></script>
+    <script>
+        require.config({
+            paths: {
+                'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.21.2/min/vs'
+            }
+        });
+
+        require(['vs/editor/editor.main'], function () {
+            var inputEditor = monaco.editor.create(document.getElementById('input-editor'), {
+                value: '',
+                language: 'xml',
+                contextmenu: false,
+                theme: 'vs'
+            });
+
+            var resultEditor = monaco.editor.create(document.getElementById('monaco-editor'), {
+                value: '',
+                language: 'xml',
+                contextmenu: false,
+                theme: 'vs',
+                readOnly: true
+            });
+
+            
+
+            function beautifyXML() {
+                let content = inputEditor.getValue();
+
+                try {
+                    // Eliminar espacios en blanco adicionales al principio y al final
+                    content = content.trim();
+
+                    let formattedXml = formatXML(content); // Asumir que formatXML funciona correctamente
+                    formattedXml = formattedXml.trim(); // Volver a recortar por si acaso
+
+                    // Verificar si hay tags adicionales al principio o al final
+                    if (formattedXml.startsWith('<') && formattedXml.endsWith('>')) {
+                        formattedXml = formattedXml.slice(1, -1);
+                    }
+
+                    resultEditor.setValue(formattedXml);
+                    resultEditor.updateOptions({ language: 'xml' });
+                } catch (e) {
+                    resultEditor.setValue('Error: Formato XML inválido.');
+                    resultEditor.updateOptions({ language: 'xml' });
+                }
+            }
+
+            function minifyXML() {
+                let content = inputEditor.getValue();
+                // Minify XML by removing unnecessary whitespace
+                let minifiedXml = content.replace(/>\s+</g, '><').trim();
+                resultEditor.setValue(minifiedXml);
+                resultEditor.updateOptions({ language: 'xml' });
+            }
+
+            function formatXML(xml) {
+                // Basic XML beautifier function
+                let formatted = '';
+                let pad = 0;
+                xml.split(/>\s*</).forEach(function (node) {
+                    if (node.match(/^\/\w/)) pad--;
+                    formatted += new Array(pad + 1).join('  ') + '<' + node + '>\r\n';
+                    if (node.match(/^<?\w[^>]*[^\/]$/)) pad++;
+                });
+                return formatted;
+            }
+
+            function xmlToJson(xml) {
+                // Create the return object
+                let obj = {};
+
+                // If the node is an element
+                if (xml.nodeType === 1) { // element node
+                    // Process attributes if any
+                    if (xml.attributes.length > 0) {
+                        obj["@attributes"] = {};
+                        for (let j = 0; j < xml.attributes.length; j++) {
+                            let attribute = xml.attributes.item(j);
+                            obj["@attributes"][attribute.nodeName] = attribute.nodeValue;
+                        }
+                    }
+
+                    // Handle child elements
+                    if (xml.hasChildNodes()) {
+                        let childObjs = {};
+
+                        for (let i = 0; i < xml.childNodes.length; i++) {
+                            let item = xml.childNodes.item(i);
+
+                            if (item.nodeType === 1) { // element node
+                                let childJson = xmlToJson(item);
+
+                                if (childJson !== null) {
+                                    if (childObjs[item.nodeName] === undefined) {
+                                        childObjs[item.nodeName] = childJson;
+                                    } else {
+                                        if (!Array.isArray(childObjs[item.nodeName])) {
+                                            childObjs[item.nodeName] = [childObjs[item.nodeName]];
+                                        }
+                                        childObjs[item.nodeName].push(childJson);
+                                    }
+                                }
+                            } else if (item.nodeType === 3 && item.nodeValue.trim()) { // text node
+                                // Handle text node
+                                obj = item.nodeValue.trim();
+                            }
+                        }
+
+                        // Merge childObjs into obj
+                        for (let key in childObjs) {
+                            if (childObjs.hasOwnProperty(key)) {
+                                if (Array.isArray(childObjs[key])) {
+                                    obj[key] = childObjs[key];
+                                } else {
+                                    obj[key] = childObjs[key];
+                                }
+                            }
+                        }
+                    }
+                }
+
+                return obj;
+            }
+
+
+            document.getElementById('beautyButton').addEventListener('click', beautifyXML);
+            document.getElementById('minifyButton').addEventListener('click', minifyXML);
+
+            document.getElementById('btn_convertir_xml_json').addEventListener('click', function () {
+                // Obtener el valor del editor de entrada
+                let xmlString = inputEditor.getValue();
+
+                // Parsear el XML a un documento XML
+                let parser = new DOMParser();
+                let xmlDoc = parser.parseFromString(xmlString, "text/xml");
+
+                // Convertir el documento XML a un objeto JavaScript
+                let json = xmlToJson(xmlDoc.documentElement);
+
+                // Asegurarse de que el nodo raíz esté presente en el resultado final
+                let rootElement = xmlDoc.documentElement.nodeName;
+                let finalJson = {};
+                finalJson[rootElement] = json;
+
+                // Convertir el objeto JavaScript a JSON en formato de texto
+                let jsonString = JSON.stringify(finalJson, null, 2);
+
+                // Mostrar el JSON en el editor de resultados
+                resultEditor.setValue(jsonString);
+                resultEditor.updateOptions({ language: 'json' });
+            });
+
+            document.getElementById('copyButton').addEventListener('click', function () {
+                navigator.clipboard.writeText(resultEditor.getValue()).then(function () {
+
+                });
+            });
+
+            document.getElementById('copyCodeButtonEntrada').addEventListener('click', function () {
+                console.log('entro a bitton entrada');
+                navigator.clipboard.writeText(inputEditor.getValue()).then(function () {
+
+                });
+            });
+            
+            document.getElementById('copyCodeButtonResult').addEventListener('click', function () {
+                navigator.clipboard.writeText(resultEditor.getValue()).then(function () {
+
+                });
+            });
+
+            document.getElementById('clearButton').addEventListener('click', function () {
+                inputEditor.setValue('');
+                resultEditor.setValue('');
+            });
+
+            
+        });
+</script>
+</body>
+
+</html>
