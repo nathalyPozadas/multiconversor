@@ -142,6 +142,92 @@
             margin-top: 20px;
         }
 
+        .footer {
+            background-color: black;
+            color: white;
+            font-size: 14px;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .footer .social-links {
+            margin-top: 10px;
+        }
+
+        .footer .social-links a {
+            text-decoration: none;
+            color: white;
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+
+        .footer .social-links a:hover {
+            color: #00d2d3;
+        }
+
+        .footer .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer .privacy-policy {
+            margin-top: 10px;
+        }
+
+        .footer .privacy-policy a {
+            text-decoration: none;
+            color: white;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        .footer .privacy-policy a:hover {
+            color: #00d2d3;
+        }
+
+        .faq-section {
+            background-color: #f8f9fb;
+            padding: 40px 20px;
+        }
+
+        .faq-section h2 {
+            text-align: center;
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 30px;
+        }
+
+        .faq-item {
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 10px;
+            background-color: white;
+        }
+
+        .faq-question {
+            background-color: transparent;
+            border: none;
+            text-align: left;
+            width: 100%;
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        .faq-question:hover {
+            color: #00d2d3;
+        }
+
+        .collapse {
+            margin-top: 10px;
+            font-size: 16px;
+            color: #555;
+        }
+
     </style>
 </head>
 
@@ -200,6 +286,64 @@
         
 
     </div>
+
+
+
+    <section class="faq-section">
+        <div class="container">
+            <h2>Preguntas Frecuentes</h2>
+            <div class="faq-item">
+                <button class="faq-question" data-bs-toggle="collapse" data-bs-target="#faq4" aria-expanded="false" aria-controls="faq4">
+                    ¿Mis datos están seguros al utilizar este conversor?
+                </button>
+                <div id="faq4" class="collapse">
+                    <p>Sí, tus datos están completamente seguros. Nuestro conversor funciona del lado del cliente, lo que significa que tus datos no se envían a ningún servidor. Todo el procesamiento se realiza directamente en tu navegador, garantizando así la privacidad de tu información.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" data-bs-toggle="collapse" data-bs-target="#faq5" aria-expanded="false" aria-controls="faq5">
+                    ¿Utilizan mis datos para fines publicitarios o de marketing?
+                </button>
+                <div id="faq5" class="collapse">
+                    <p>No, en ningún caso utilizamos tus datos con fines publicitarios o de marketing. Respetamos tu privacidad y nos comprometemos a no compartir tu información con terceros.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" data-bs-toggle="collapse" data-bs-target="#faq6" aria-expanded="false" aria-controls="faq6">
+                    ¿Es gratuito este servicio?
+                </button>
+                <div id="faq6" class="collapse">
+                    <p>Sí, nuestro servicio de conversión es completamente gratuito. No hay costos ocultos ni suscripciones requeridas.</p>
+                </div>
+            </div>
+            <section class="why-section">
+                <div class="container">
+                    <h2>¿Por qué comparar texto?</h2>
+                    <p>La comparación de textos es útil para detectar diferencias entre versiones, validar consistencia o realizar revisiones detalladas en contenido o código.</p>
+                    <ul>
+                        <li><strong>Identificar cambios:</strong> Útil para ver qué diferencias existen entre dos fragmentos de texto.</li>
+                        <li><strong>Colaboración eficiente:</strong> Asegura que varias personas trabajando en el mismo proyecto mantengan coherencia.</li>
+                        <li><strong>Revisión de calidad:</strong> Verifica que los textos sean consistentes y correctos, ideal para artículos, código, o cualquier tipo de contenido.</li>
+                        <li><strong>Detección de errores:</strong> Ayuda a encontrar errores al comparar textos previos con los actuales.</li>
+                    </ul>
+                </div>
+            </section>
+            
+        </div>
+    </section>
+    
+    
+
+
+    <footer class="footer">
+        <div class="container text-center py-3">
+            <p class="m-0">&copy; 2024 Multiconversor. Todos los derechos reservados.</p>
+            <div class="privacy-policy">
+                <a href="./politicas_privacidad" class="text-white">Política de Privacidad</a>
+            </div>
+        </div>
+    </footer>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.21.2/min/vs/loader.js"></script>
     <script>
 
